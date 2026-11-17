@@ -52,3 +52,10 @@ from 2²⁶ on, while the base-13 ones digit keeps climbing towards {0, 2, 7} (7
 ## License
 
 MIT
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/subtract-a-square/
+- 📝 記事: https://qiita.com/sen-ltd/items/d8fe2861d2bfc18b82e2
+<!-- /sen-publish:links -->
