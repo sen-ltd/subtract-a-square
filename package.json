@@ -1,0 +1,22 @@
+{
+  "name": "subtract-a-square",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Subtract-a-square (take a square number of tokens) in the browser with exact solvers; every checkable statement of Eppstein's Faster Evaluation of Subtraction Games rechecked by sieves and mex tables up to 2^30. TypeScript, no runtime deps.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 4173",
+    "test": "vitest run",
+    "verify": "node tools/verify.mts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
+  },
+  "license": "MIT"
+}

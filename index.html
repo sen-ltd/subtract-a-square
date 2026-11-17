@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subtract-a-square — a game whose losing positions are a square-difference-free set</title>
+    <meta
+      name="description"
+      content="Subtract-a-square (take 1, 4, 9, 16, … tokens) against an exact solver, with sums of heaps. The losing positions form a maximal square-difference-free set; every checkable statement of Eppstein's Faster Evaluation of Subtraction Games is recomputed up to 2^30."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141518'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' fill='%23d9b45a'%3En²%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Subtract-a-square <span>take 1, 4, 9, 16, …</span></h1>
+        <p class="sub">
+          A heap of tokens. On your turn, take away a <strong>square number</strong> of tokens from one heap. Whoever takes
+          the last token wins. Golomb called it "remarkably complex" in 1966 and nobody has a formula yet. The losing heaps
+          (<em>cold</em> positions) 0, 2, 5, 7, 10, 12, 15, 17, 20, 22, 34, … never differ by a square, so they are a
+          <strong>square-difference-free set</strong> — the kind of set the Furstenberg–Sárközy theorem says has density 0.
+          Yet they are about as dense as the best constructions number theorists know: roughly <strong>n<sup>0.7</sup></strong>
+          of the first n numbers.
+        </p>
+      </header>
+
+      <div id="wrap">
+        <div class="stage">
+          <h3>play <span class="dim">against the solver (nim-values up to 20,000)</span></h3>
+          <div class="panel">
+            <div class="controls">
+              <label class="sel">heaps <select id="kSel"><option>1</option><option selected>2</option><option>3</option></select></label>
+              <button id="random">New position</button>
+              <label class="sel">add heap <input id="custom" placeholder="e.g. 34" inputmode="numeric" /></label>
+              <label class="sel chk"><input type="checkbox" id="hints" checked /> hints</label>
+              <label class="sel chk"><input type="checkbox" id="cpu" checked /> computer replies</label>
+            </div>
+            <div id="piles"></div>
+            <div class="controls after">
+              <button id="best">Show the winning move</button>
+              <button id="undo">Undo</button>
+            </div>
+            <div id="status" aria-live="polite"></div>
+          </div>
+
+          <h3>nim-values 0 … 4095 <span class="dim">— 64 per row</span></h3>
+          <div class="panel">
+            <canvas id="grid" width="720" height="460"></canvas>
+            <div class="legend" id="gridLegend"></div>
+            <div id="hover" class="dim"></div>
+            <p class="small dim">Black = cold (nim-value 0). Click a cell to play that heap.</p>
+          </div>
+
+          <h3>how many cold positions? <span class="dim">— |C ∩ [0, n)| on log–log axes, n ≤ 2<sup>30</sup></span></h3>
+          <div class="panel">
+            <canvas id="density" width="720" height="360"></canvas>
+            <div class="legend" id="densityLegend"></div>
+            <p class="small dim" id="densityNote"></p>
+          </div>
+
+          <h3>largest nim-value <span class="dim">— record values up to n = 2<sup>24</sup></span></h3>
+          <div class="panel">
+            <canvas id="maxnim" width="720" height="300"></canvas>
+            <div class="legend" id="maxnimLegend"></div>
+            <p class="small dim" id="maxnimNote"></p>
+          </div>
+
+          <h3>low-order digits of the cold positions <span class="dim">— all cold positions below 2<sup>30</sup></span></h3>
+          <div class="panel">
+            <div class="hists" id="hists"></div>
+            <p class="small dim">Bars are shares of each digit value; the dashed line is the uniform share. Highlighted digits form a square-difference-free set ({0,2} mod 5, {0,2,7} mod 13).</p>
+          </div>
+
+          <h3>three algorithms <span class="dim">— wall time in this repo's TypeScript (Node)</span></h3>
+          <div class="panel" id="timings"></div>
+        </div>
+
+        <div class="side">
+          <h3>paper check <span class="dim" id="checkHead"></span></h3>
+          <div class="panel" id="checks"></div>
+        </div>
+      </div>
+
+      <footer>
+        <a href="https://github.com/sen-ltd/subtract-a-square">source</a> · MIT · <a href="https://sen.ltd/">SEN LLC</a>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
